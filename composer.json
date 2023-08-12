@@ -29,6 +29,7 @@
         "psr/http-message": "^2",
         "webservco/command": "^0",
         "webservco/configuration": "^0",
+        "webservco/data": "^0",
         "webservco/http": "^0",
         "webservco/log": "^0",
         "webservco/stopwatch": "^0"

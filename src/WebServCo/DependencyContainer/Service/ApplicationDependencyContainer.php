@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace WebServCo\DependencyContainer\Service;
 
 use WebServCo\Configuration\Factory\ServerConfigurationGetterFactory;
+use WebServCo\Data\Contract\Extraction\DataExtractionContainerInterface;
+use WebServCo\Data\Factory\Extraction\DataExtractionContainerFactory;
 use WebServCo\DependencyContainer\Contract\ApplicationDependencyContainerInterface;
 use WebServCo\DependencyContainer\Contract\FactoryContainerInterface;
 use WebServCo\DependencyContainer\Contract\ServiceContainerInterface;
@@ -22,6 +24,7 @@ use const DIRECTORY_SEPARATOR;
  */
 final class ApplicationDependencyContainer implements ApplicationDependencyContainerInterface
 {
+    private ?DataExtractionContainerInterface $dataExtractionContainer = null;
     private ?FactoryContainerInterface $factoryContainer = null;
     private ?ServiceContainerInterface $serviceContainer = null;
 
@@ -29,6 +32,16 @@ final class ApplicationDependencyContainer implements ApplicationDependencyConta
     {
         // Make sure path contains trailing slash (trim + add back).
         $this->projectPath = rtrim($this->projectPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+    }
+
+    public function getDataExtractionContainer(): DataExtractionContainerInterface
+    {
+        if ($this->dataExtractionContainer === null) {
+            $dataExtractionContainerFactory = new DataExtractionContainerFactory();
+            $this->dataExtractionContainer = $dataExtractionContainerFactory->createDataExtractionContainer();
+        }
+
+        return $this->dataExtractionContainer;
     }
 
     public function getFactoryContainer(): FactoryContainerInterface
