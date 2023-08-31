@@ -11,6 +11,8 @@ use WebServCo\Configuration\Contract\ConfigurationGetterFactoryInterface;
 use WebServCo\Configuration\Contract\ConfigurationGetterInterface;
 use WebServCo\DependencyContainer\Contract\ServiceContainerInterface;
 use WebServCo\Log\Contract\LoggerFactoryInterface;
+use WebServCo\Session\Contract\SessionServiceInterface;
+use WebServCo\Session\Factory\SessionServiceFactory;
 use WebServCo\Stopwatch\Contract\LapTimerInterface;
 
 use function array_key_exists;
@@ -21,6 +23,7 @@ use function array_key_exists;
 final class ServiceContainer implements ServiceContainerInterface
 {
     private ?ConfigurationGetterInterface $configurationGetter = null;
+    private ?SessionServiceInterface $sessionService = null;
 
     /**
      * List of loggers.
@@ -75,5 +78,15 @@ final class ServiceContainer implements ServiceContainerInterface
         }
 
         return $this->outputServices[$channel];
+    }
+
+    public function getSessionService(): SessionServiceInterface
+    {
+        if ($this->sessionService === null) {
+            $sessionServiceFactory = new SessionServiceFactory($this->getConfigurationGetter());
+            $this->sessionService = $sessionServiceFactory->createSessionService();
+        }
+
+        return $this->sessionService;
     }
 }
