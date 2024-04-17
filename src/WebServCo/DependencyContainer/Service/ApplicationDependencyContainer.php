@@ -38,7 +38,7 @@ final class ApplicationDependencyContainer implements ApplicationDependencyConta
     {
         if ($this->dataExtractionContainer === null) {
             $dataExtractionContainerFactory = new DataExtractionContainerFactory();
-            $this->dataExtractionContainer = $dataExtractionContainerFactory->createDataExtractionContainer();
+            $this->dataExtractionContainer = $dataExtractionContainerFactory->createDataExtractionContainer(true);
         }
 
         return $this->dataExtractionContainer;
