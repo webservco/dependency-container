@@ -31,6 +31,8 @@
         "webservco/configuration": "^0",
         "webservco/data": "^0",
         "webservco/http": "^0",
+        "webservco/http-request-service": "^0",
+        "webservco/http-response-service": "^0",
         "webservco/log": "^0",
         "webservco/session": "^0",
         "webservco/stopwatch": "^0"

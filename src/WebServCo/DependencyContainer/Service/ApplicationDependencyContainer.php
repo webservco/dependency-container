@@ -11,6 +11,10 @@ use WebServCo\DependencyContainer\Contract\ApplicationDependencyContainerInterfa
 use WebServCo\DependencyContainer\Contract\FactoryContainerInterface;
 use WebServCo\DependencyContainer\Contract\ServiceContainerInterface;
 use WebServCo\DependencyContainer\Factory\FactoryContainerFactory;
+use WebServCo\Http\Container\Message\Request\RequestServiceContainer;
+use WebServCo\Http\Container\Message\Response\ResponseServiceContainer;
+use WebServCo\Http\Contract\Message\Request\Container\RequestServiceContainerInterface;
+use WebServCo\Http\Contract\Message\Response\Container\ResponseServiceContainerInterface;
 use WebServCo\Log\Factory\ContextFileLoggerFactory;
 use WebServCo\Stopwatch\Contract\LapTimerInterface;
 
@@ -21,11 +25,21 @@ use const DIRECTORY_SEPARATOR;
 
 /**
  * A simple opinionated Application dependency container
+ *
+ * PHPMD error CouplingBetweenObjects could be solved by using only implementations and not also interfaces.
+ *
+ * @todo solve CouplingBetweenObjects
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 final class ApplicationDependencyContainer implements ApplicationDependencyContainerInterface
 {
     private ?DataExtractionContainerInterface $dataExtractionContainer = null;
     private ?FactoryContainerInterface $factoryContainer = null;
+
+    private ?RequestServiceContainerInterface $requestServiceContainer = null;
+
+    private ?ResponseServiceContainerInterface $responseServiceContainer = null;
+
     private ?ServiceContainerInterface $serviceContainer = null;
 
     public function __construct(private string $projectPath, private LapTimerInterface $lapTimer)
@@ -54,6 +68,24 @@ final class ApplicationDependencyContainer implements ApplicationDependencyConta
         }
 
         return $this->factoryContainer;
+    }
+
+    public function getRequestServiceContainer(): RequestServiceContainerInterface
+    {
+        if ($this->requestServiceContainer === null) {
+            $this->requestServiceContainer = new RequestServiceContainer();
+        }
+
+        return $this->requestServiceContainer;
+    }
+
+    public function getResponseServiceContainer(): ResponseServiceContainerInterface
+    {
+        if ($this->responseServiceContainer === null) {
+            $this->responseServiceContainer = new ResponseServiceContainer();
+        }
+
+        return $this->responseServiceContainer;
     }
 
     public function getServiceContainer(): ServiceContainerInterface
