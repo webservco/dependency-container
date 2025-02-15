@@ -29,7 +29,7 @@ use const DIRECTORY_SEPARATOR;
  * PHPMD error CouplingBetweenObjects could be solved by using only implementations and not also interfaces.
  *
  * @todo solve CouplingBetweenObjects
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
  */
 final class ApplicationDependencyContainer implements ApplicationDependencyContainerInterface
 {
