@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WebServCo\DependencyContainer\Service;
 
+use Override;
 use Psr\Log\LoggerInterface;
 use WebServCo\Command\Contract\OutputFactoryInterface;
 use WebServCo\Command\Contract\OutputInterface;
@@ -48,6 +49,7 @@ final class ServiceContainer implements ServiceContainerInterface
     ) {
     }
 
+    #[Override]
     public function getConfigurationGetter(): ConfigurationGetterInterface
     {
         if ($this->configurationGetter === null) {
@@ -57,11 +59,13 @@ final class ServiceContainer implements ServiceContainerInterface
         return $this->configurationGetter;
     }
 
+    #[Override]
     public function getLapTimer(): LapTimerInterface
     {
         return $this->lapTimer;
     }
 
+    #[Override]
     public function getLogger(string $channel): LoggerInterface
     {
         if (!array_key_exists($channel, $this->loggers)) {
@@ -71,6 +75,7 @@ final class ServiceContainer implements ServiceContainerInterface
         return $this->loggers[$channel];
     }
 
+    #[Override]
     public function getOutputService(string $channel): OutputInterface
     {
         if (!array_key_exists($channel, $this->outputServices)) {
@@ -80,6 +85,7 @@ final class ServiceContainer implements ServiceContainerInterface
         return $this->outputServices[$channel];
     }
 
+    #[Override]
     public function getSessionService(): SessionServiceInterface
     {
         if ($this->sessionService === null) {

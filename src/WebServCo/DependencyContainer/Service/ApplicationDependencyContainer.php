@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WebServCo\DependencyContainer\Service;
 
+use Override;
 use WebServCo\Configuration\Factory\ServerConfigurationGetterFactory;
 use WebServCo\Data\Contract\Extraction\DataExtractionContainerInterface;
 use WebServCo\Data\Factory\Extraction\DataExtractionContainerFactory;
@@ -48,6 +49,7 @@ final class ApplicationDependencyContainer implements ApplicationDependencyConta
         $this->projectPath = rtrim($this->projectPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
     }
 
+    #[Override]
     public function getDataExtractionContainer(): DataExtractionContainerInterface
     {
         if ($this->dataExtractionContainer === null) {
@@ -58,6 +60,7 @@ final class ApplicationDependencyContainer implements ApplicationDependencyConta
         return $this->dataExtractionContainer;
     }
 
+    #[Override]
     public function getFactoryContainer(): FactoryContainerInterface
     {
         if ($this->factoryContainer === null) {
@@ -70,6 +73,7 @@ final class ApplicationDependencyContainer implements ApplicationDependencyConta
         return $this->factoryContainer;
     }
 
+    #[Override]
     public function getRequestServiceContainer(): RequestServiceContainerInterface
     {
         if ($this->requestServiceContainer === null) {
@@ -79,6 +83,7 @@ final class ApplicationDependencyContainer implements ApplicationDependencyConta
         return $this->requestServiceContainer;
     }
 
+    #[Override]
     public function getResponseServiceContainer(): ResponseServiceContainerInterface
     {
         if ($this->responseServiceContainer === null) {
@@ -88,6 +93,7 @@ final class ApplicationDependencyContainer implements ApplicationDependencyConta
         return $this->responseServiceContainer;
     }
 
+    #[Override]
     public function getServiceContainer(): ServiceContainerInterface
     {
         if ($this->serviceContainer === null) {
