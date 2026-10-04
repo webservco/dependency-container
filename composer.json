@@ -27,15 +27,15 @@
     "require": {
         "php" : "^8.4",
         "psr/http-message": "^2",
-        "webservco/command": "^1",
-        "webservco/configuration": "^1",
-        "webservco/data": "^1",
-        "webservco/http": "^1",
-        "webservco/http-request-service": "^1",
-        "webservco/http-response-service": "^1",
-        "webservco/log": "^1",
-        "webservco/session": "^1",
-        "webservco/stopwatch": "^1"
+        "webservco/command": "^2",
+        "webservco/configuration": "^2",
+        "webservco/data": "^2",
+        "webservco/http": "^2",
+        "webservco/http-request-service": "^2",
+        "webservco/http-response-service": "^2",
+        "webservco/log": "^2",
+        "webservco/session": "^2",
+        "webservco/stopwatch": "^2"
     },
     "require-dev": {
         "pds/skeleton": "^1",
