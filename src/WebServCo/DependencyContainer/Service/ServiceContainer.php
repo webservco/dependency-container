@@ -13,6 +13,7 @@ use WebServCo\Configuration\Contract\ConfigurationGetterInterface;
 use WebServCo\DependencyContainer\Contract\ServiceContainerInterface;
 use WebServCo\Log\Contract\LoggerFactoryInterface;
 use WebServCo\Session\Contract\SessionServiceInterface;
+use WebServCo\Session\Factory\CookieConfigurationFactory;
 use WebServCo\Session\Factory\SessionServiceFactory;
 use WebServCo\Stopwatch\Contract\LapTimerInterface;
 
@@ -89,7 +90,13 @@ final class ServiceContainer implements ServiceContainerInterface
     public function getSessionService(): SessionServiceInterface
     {
         if ($this->sessionService === null) {
-            $sessionServiceFactory = new SessionServiceFactory($this->getConfigurationGetter());
+            $sessionServiceFactory = new SessionServiceFactory(
+                /** For the moment there is no use case for it individually, so ok that we init here. */
+                new CookieConfigurationFactory(
+                    $this->getConfigurationGetter(),
+                ),
+                $this->getConfigurationGetter(),
+            );
             $this->sessionService = $sessionServiceFactory->createSessionService();
         }
 
